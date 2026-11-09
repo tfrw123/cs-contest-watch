@@ -1,6 +1,6 @@
 {
   "season": "2026–2027",
-  "lastChecked": "2026-11-09T10:04:22Z",
+  "lastChecked": "2026-11-09T19:05:55Z",
   "contests": [
     {
       "key": "USACO",
@@ -363,6 +363,50 @@
     }
   ],
   "history": [
+    {
+      "id": "AIO-20261109T190555Z",
+      "contest": "AIO",
+      "type": "official_page_changed",
+      "detectedAt": "2026-11-09T19:05:55Z",
+      "url": "https://amt.edu.au/aio",
+      "message": "AIO 官方页面内容发生变化；请核对是否涉及报名或赛程日期。",
+      "previousHash": "f7c95c81a25af95b4373908958dbc9f9f81f70628dece74faba2c3857c09da60",
+      "currentHash": "91b7ba2f70270b5c00bdaa215d22a22216a19056b7d7ea2c1d8dc417be5720e5",
+      "lastModified": null
+    },
+    {
+      "id": "ACSL-20261109T190555Z",
+      "contest": "ACSL",
+      "type": "official_page_changed",
+      "detectedAt": "2026-11-09T19:05:55Z",
+      "url": "https://www.acsl.org/get-started/schedule",
+      "message": "ACSL 官方页面内容发生变化；请核对是否涉及报名或赛程日期。",
+      "previousHash": "cf51ad7d446ada67392357fa596f9308944ba963eb038054cddec977e5066d0c",
+      "currentHash": "3d7c45f007a7319cfdcd0fa78048f4e89a05b181b6caa963c162ec80a4485ecf",
+      "lastModified": null
+    },
+    {
+      "id": "ACSL-20261109T190555Z",
+      "contest": "ACSL",
+      "type": "official_page_changed",
+      "detectedAt": "2026-11-09T19:05:55Z",
+      "url": "https://www.acsl.org/Registration",
+      "message": "ACSL 官方页面内容发生变化；请核对是否涉及报名或赛程日期。",
+      "previousHash": "e67536ba54f2fc42f3572e7f92460ad2b29deeb7cf1aa8b68936fb55a9d13648",
+      "currentHash": "9e53c55c7dafa5efccec8a0541f7acd1a01e54d7742a5a64440b032ee266c5d8",
+      "lastModified": null
+    },
+    {
+      "id": "USACO-20261109T190555Z",
+      "contest": "USACO",
+      "type": "official_page_changed",
+      "detectedAt": "2026-11-09T19:05:55Z",
+      "url": "https://usaco.org/",
+      "message": "USACO 官方页面内容发生变化；请核对是否涉及报名或赛程日期。",
+      "previousHash": "d23dfc9d0084c0d50d4fb50af52dc22d6503718377e4a5fcc973f5c35e4b4061",
+      "currentHash": "b97743ddd7566532deaf668e86dfe081add8322ef684db8a152d6fa1941843bf",
+      "lastModified": null
+    },
     {
       "id": "USACO-20261109T100422Z",
       "contest": "USACO",
