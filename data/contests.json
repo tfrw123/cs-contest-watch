@@ -1,0 +1,366 @@
+{
+  "season": "2026–2027",
+  "lastChecked": null,
+  "contests": [
+    {
+      "key": "USACO",
+      "id": "USACO",
+      "full": "USA Computing Olympiad",
+      "mode": "个人报名",
+      "statusLabel": "常年注册 / 无赛季预注册",
+      "statusClass": "neutral",
+      "deadline": "无统一赛季报名截止日",
+      "season": "2026–2027 赛程待官方公布",
+      "shortDeadline": "无统一截止",
+      "shortSeason": "赛程 TBD",
+      "regText": "常年可创建个人账号；无需赛季预注册。2026–2027 正式赛程尚未公布。",
+      "eligibility": "在线竞赛对所有人开放。所有新参赛者从 Bronze 开始。只有美国境内的 pre-college 学生才具备参加 USACO Training Camp 与代表美国参加 IOI / EGOI 选拔的资格；国际参赛者可参加常规赛，但与美国学生的官方选拔资格不同。",
+      "rounds": "学年内通常举办多场线上比赛与 US Open，但 2026–2027 具体场次与日期尚未正式公布，本页不使用往年赛程替代。",
+      "groups": "Bronze、Silver、Gold、Platinum。新参赛者从 Bronze 起步，通过比赛达到晋级线后升组。",
+      "difficulty": "从基础编程与算法入门逐步提升到图论、动态规划和高级数据结构。Gold 与 Platinum 难度较高。",
+      "languages": "C、C++、Java、Python。官方语言为英语；如存在多语言题面差异，以英文版为准。",
+      "format": "个人线上赛。比赛通常在指定周末窗口内开始，开始后连续完成；常规赛常见时长约 4 小时，US Open 通常更长。",
+      "links": [
+        [
+          "官方竞赛说明",
+          "https://usaco.org/current/index.php?page=details"
+        ],
+        [
+          "官方规则与资格",
+          "https://usaco.org/index.php?page=instructions"
+        ],
+        [
+          "账号注册",
+          "https://usaco.org/index.php?page=register"
+        ]
+      ],
+      "events": [
+        {
+          "id": "usaco-pending",
+          "label": "2026–2027 官方赛程待公布",
+          "kind": "unknown",
+          "start": null,
+          "end": null,
+          "source": "https://usaco.org/"
+        }
+      ],
+      "officialSources": [
+        "https://usaco.org/current/index.php?page=details",
+        "https://usaco.org/index.php?page=instructions",
+        "https://usaco.org/index.php?page=register"
+      ]
+    },
+    {
+      "key": "ACSL",
+      "id": "ACSL",
+      "full": "American Computer Science League",
+      "mode": "学校报名",
+      "statusLabel": "报名已开放",
+      "statusClass": "open",
+      "deadline": "2026/12/31（赛季团队报名截止）",
+      "season": "Contest 1：2026/10/19–2027/01/10；Contest 2：2027/01/04–02/28；Contest 3：2027/02/01–04/11；Contest 4：2027/03/01–05/23；Finals：2027/05/29",
+      "shortDeadline": "截止 12/31",
+      "shortSeason": "C1–C4 + Finals",
+      "regText": "2026–2027 赛季报名已开放；由 Team Advisor 为学校 / 组织团队注册，截止 2026/12/31。",
+      "eligibility": "面向 K–12 学生，学校、组织和 homeschool 团队均可参加。通常由教师、家长或有经验的成年人担任 Team Advisor。官网未列出按国籍限制参赛的条件。",
+      "rounds": "常规赛共 4 轮，均在在线窗口内完成；高分选手可受邀参加 2027/05/29 的 Invitational Finals。",
+      "groups": "Senior、Intermediate、Junior、Classroom、Elementary 五个组别。不同组别面向不同年级与编程经验水平。",
+      "difficulty": "从计算机科学基础到算法与编程。Senior / Intermediate / Junior 含短答题与编程题；Classroom 和 Elementary 更偏基础知识与非编程题。",
+      "languages": "编程题可使用 Python 3、Java 或 C++。题目主要为英语。",
+      "format": "按组别进行。Junior / Intermediate / Senior：30 分钟短答 + 72 小时编程题；Classroom：50 分钟短答；Elementary：30 分钟非编程题。",
+      "links": [
+        [
+          "官方报名页",
+          "https://www.acsl.org/Registration"
+        ],
+        [
+          "官方赛程",
+          "https://www.acsl.org/get-started/schedule"
+        ],
+        [
+          "组别说明",
+          "https://www.acsl.org/get-started/divisions"
+        ],
+        [
+          "官方 FAQ",
+          "https://www.acsl.org/about/faq"
+        ]
+      ],
+      "events": [
+        {
+          "id": "acsl-reg",
+          "label": "团队报名截止 · 12/31",
+          "kind": "deadline",
+          "start": "2026-12-31",
+          "end": "2026-12-31",
+          "source": "https://www.acsl.org/Registration"
+        },
+        {
+          "id": "acsl-c1",
+          "label": "Contest 1 · 10/19–1/10",
+          "kind": "window",
+          "start": "2026-10-19",
+          "end": "2027-01-10",
+          "source": "https://www.acsl.org/get-started/schedule"
+        },
+        {
+          "id": "acsl-c2",
+          "label": "Contest 2 · 1/4–2/28",
+          "kind": "window",
+          "start": "2027-01-04",
+          "end": "2027-02-28",
+          "source": "https://www.acsl.org/get-started/schedule"
+        },
+        {
+          "id": "acsl-c3",
+          "label": "Contest 3 · 2/1–4/11",
+          "kind": "window",
+          "start": "2027-02-01",
+          "end": "2027-04-11",
+          "source": "https://www.acsl.org/get-started/schedule"
+        },
+        {
+          "id": "acsl-c4",
+          "label": "Contest 4 · 3/1–5/23",
+          "kind": "window",
+          "start": "2027-03-01",
+          "end": "2027-05-23",
+          "source": "https://www.acsl.org/get-started/schedule"
+        },
+        {
+          "id": "acsl-finals",
+          "label": "Invitational Finals · 5/29",
+          "kind": "contest",
+          "start": "2027-05-29",
+          "end": "2027-05-29",
+          "source": "https://www.acsl.org/get-started/schedule"
+        }
+      ],
+      "officialSources": [
+        "https://www.acsl.org/Registration",
+        "https://www.acsl.org/get-started/schedule",
+        "https://www.acsl.org/get-started/divisions",
+        "https://www.acsl.org/about/faq"
+      ]
+    },
+    {
+      "key": "BCC",
+      "id": "BCC",
+      "full": "Beaver Computing Challenge · CEMC / University of Waterloo",
+      "mode": "学校报名",
+      "statusLabel": "报名已截止",
+      "statusClass": "closed",
+      "deadline": "2026/10/26（学校订购截止）",
+      "season": "比赛窗口：2026/11/09–11/20（美洲地区）",
+      "shortDeadline": "截止 10/26",
+      "shortSeason": "11/09–11/20",
+      "regText": "学校订购已于 2026/10/26 截止。比赛窗口为 2026/11/09–11/20。",
+      "eligibility": "按年级分为 Grade 5/6、Grade 7/8、Grade 9/10 三个组。每名学生每学年最多参加一个 BCC 级别。由学校 Contest Supervisor 统一组织。",
+      "rounds": "每学年一场挑战赛；学校在官方给定窗口内安排具体考试日。",
+      "groups": "Grade 5/6、Grade 7/8、Grade 9/10 三个年级组。",
+      "difficulty": "计算思维、逻辑推理与问题解决为主，不是编程提交型竞赛。Grade 5/6 为 12 道选择题；其余两组为 15 道选择题。",
+      "languages": "在线答题，不要求用编程语言提交程序。学校应按 CEMC 提供的当年题面版本组织比赛。",
+      "format": "个人在线答题，限时 45 分钟。由学校统一订购账号、安排监考和组织参赛。",
+      "links": [
+        [
+          "BCC 官方赛事页",
+          "https://cemc.uwaterloo.ca/contests/bcc"
+        ],
+        [
+          "CEMC 官网",
+          "https://cemc.uwaterloo.ca/"
+        ]
+      ],
+      "events": [
+        {
+          "id": "bcc-order",
+          "label": "学校订购截止 · 10/26",
+          "kind": "deadline",
+          "start": "2026-10-26",
+          "end": "2026-10-26",
+          "source": "https://cemc.uwaterloo.ca/contests/bcc"
+        },
+        {
+          "id": "bcc-window",
+          "label": "比赛窗口 · 11/9–11/20",
+          "kind": "window",
+          "start": "2026-11-09",
+          "end": "2026-11-20",
+          "source": "https://cemc.uwaterloo.ca/contests/bcc"
+        }
+      ],
+      "officialSources": [
+        "https://cemc.uwaterloo.ca/contests/bcc",
+        "https://cemc.uwaterloo.ca/"
+      ]
+    },
+    {
+      "key": "CCC",
+      "id": "CCC",
+      "full": "Canadian Computing Competition · CEMC / University of Waterloo",
+      "mode": "学校报名",
+      "statusLabel": "已公布截止日 / 开放日未说明",
+      "statusClass": "pending",
+      "deadline": "2027/02/11（学校订购截止）",
+      "season": "比赛：2027/02/17（美洲） / 2027/02/18（其他地区）",
+      "shortDeadline": "截止 02/11",
+      "shortSeason": "02/17–02/18",
+      "regText": "学校订购截止 2027/02/11；官方页面未明确写出开放日期。",
+      "eligibility": "任何全日制学生均可参加。若要被认定为 official participant 并具备进入后续官方选拔或排名资格，需满足官网关于出生日期与学校所在地的条件；不满足者仍可作为 unofficial participant 参赛。",
+      "rounds": "每年一场竞赛。2027 年美洲地区比赛日为 2027/02/17，其他地区为 2027/02/18。",
+      "groups": "Junior 与 Senior 两个级别。学生可按能力选择，不强制按年级划分。",
+      "difficulty": "每级 5 道题，3 小时。Senior 后几题难度较高，可达到较强算法竞赛水平。",
+      "languages": "C、C++、Python 2、Python 3、Java。题目主要为英语，实际以当年官方题面为准。",
+      "format": "个人在线作答，通过 CCC Online Grader 提交。由学校 Contest Supervisor 管理账号和监考。",
+      "links": [
+        [
+          "CCC 官方赛事页",
+          "https://cemc.uwaterloo.ca/contests/ccc"
+        ],
+        [
+          "CEMC 官网",
+          "https://cemc.uwaterloo.ca/"
+        ]
+      ],
+      "events": [
+        {
+          "id": "ccc-order",
+          "label": "学校订购截止 · 2/11",
+          "kind": "deadline",
+          "start": "2027-02-11",
+          "end": "2027-02-11",
+          "source": "https://cemc.uwaterloo.ca/contests/ccc"
+        },
+        {
+          "id": "ccc-americas",
+          "label": "比赛日 · 2/17（美洲）",
+          "kind": "contest",
+          "start": "2027-02-17",
+          "end": "2027-02-17",
+          "source": "https://cemc.uwaterloo.ca/contests/ccc"
+        },
+        {
+          "id": "ccc-other",
+          "label": "比赛日 · 2/18（其他地区）",
+          "kind": "contest",
+          "start": "2027-02-18",
+          "end": "2027-02-18",
+          "source": "https://cemc.uwaterloo.ca/contests/ccc"
+        }
+      ],
+      "officialSources": [
+        "https://cemc.uwaterloo.ca/contests/ccc",
+        "https://cemc.uwaterloo.ca/"
+      ]
+    },
+    {
+      "key": "AIO",
+      "id": "AIO",
+      "full": "Australian Informatics Olympiad · Australian Maths Trust",
+      "mode": "学校报名",
+      "statusLabel": "已公布截止日 / 开放日未说明",
+      "statusClass": "pending",
+      "deadline": "2027/08/20（报名截止）",
+      "season": "比赛日：2027/08/26",
+      "shortDeadline": "截止 08/20",
+      "shortSeason": "比赛 08/26",
+      "regText": "2027 年比赛日和报名截止日已公布；官方页面未明确写出开放日期。",
+      "eligibility": "Intermediate 奖项组别面向 Australian Year 10 及以下，Senior 奖项组别面向 Australian Year 12 及以下。赛事页面通过学校 / 教师门户为学生报名；公开页面未明确写出国籍限制。",
+      "rounds": "每年一场竞赛。2027 年比赛日为 2027/08/26，报名截止 2027/08/20。",
+      "groups": "Intermediate 与 Senior 两个奖项组别。通常只有一份试卷，组别主要用于奖项评定。",
+      "difficulty": "6 道编程题，考查算法设计、文件读写、循环、条件判断、数组和效率。需要具备一定编程基础。",
+      "languages": "C、C++、Java、Python 3。页面主要为英语。",
+      "format": "个人在线编程赛，时长 3 小时。源代码由自动评测系统按正确性与效率评分。",
+      "links": [
+        [
+          "AIO 官方赛事页",
+          "https://amt.edu.au/aio"
+        ],
+        [
+          "AMT 竞赛门户",
+          "https://competitions.amt.edu.au/"
+        ]
+      ],
+      "events": [
+        {
+          "id": "aio-deadline",
+          "label": "报名截止 · 8/20",
+          "kind": "deadline",
+          "start": "2027-08-20",
+          "end": "2027-08-20",
+          "source": "https://amt.edu.au/aio"
+        },
+        {
+          "id": "aio-contest",
+          "label": "比赛日 · 8/26",
+          "kind": "contest",
+          "start": "2027-08-26",
+          "end": "2027-08-26",
+          "source": "https://amt.edu.au/aio"
+        }
+      ],
+      "officialSources": [
+        "https://amt.edu.au/aio",
+        "https://competitions.amt.edu.au/"
+      ]
+    },
+    {
+      "key": "NZIC",
+      "id": "NZIO / NZIC",
+      "full": "New Zealand Informatics Competition · New Zealand Olympiad in Informatics",
+      "mode": "个人报名",
+      "statusLabel": "待公布",
+      "statusClass": "tbd",
+      "deadline": "TBD（官方尚未公布）",
+      "season": "预计 2027 年 2 月开放报名；2027 年三轮比赛日期 TBD",
+      "shortDeadline": "截止 TBD",
+      "shortSeason": "预计 02 开放 / 3 轮 TBD",
+      "regText": "2027 年报名预计 2027 年 2 月开放；截止日期和三轮比赛日期尚未公布。",
+      "eligibility": "目前在新西兰 secondary school 或 intermediate school 就读的学生具备官方排名资格。其他人仍可参加，但不会进入官方排名。规则强调学校就读资格，而非国籍。",
+      "rounds": "2027 年确定有 3 轮；具体日期将在 2027 年初公布。每轮提供一周比赛窗口，开始后通常有 3 小时完成。",
+      "groups": "官网当前规则未列出按年级或难度划分的独立赛组；以个人成绩与累计成绩排名。",
+      "difficulty": "从入门实现题到较高难度的算法题，采用子任务评分，可获得部分分数。",
+      "languages": "支持 C++、C、C#、Python、JavaScript、Java、Ruby、Haskell 等；解释型语言可能受效率限制。",
+      "format": "个人线上赛。每轮在一周窗口内任选时间开始，开始后 3 小时完成；规则明确禁止协作与生成式 AI。",
+      "links": [
+        [
+          "NZIC 官方赛事页",
+          "https://www.nzoi.org.nz/nzic/"
+        ],
+        [
+          "NZIC 官方规则",
+          "https://www.nzoi.org.nz/nzic/rules/"
+        ],
+        [
+          "NZOI 介绍",
+          "https://www.nzoi.org.nz/nzic/about/"
+        ]
+      ],
+      "events": [
+        {
+          "id": "nzic-open",
+          "label": "预计开放报名 · 2027/02",
+          "kind": "expected",
+          "start": null,
+          "end": null,
+          "month": "2027-02",
+          "source": "https://www.nzoi.org.nz/nzic/"
+        },
+        {
+          "id": "nzic-rounds",
+          "label": "2027 三轮比赛日期 · TBD",
+          "kind": "unknown",
+          "start": null,
+          "end": null,
+          "source": "https://www.nzoi.org.nz/nzic/"
+        }
+      ],
+      "officialSources": [
+        "https://www.nzoi.org.nz/nzic/",
+        "https://www.nzoi.org.nz/nzic/rules/",
+        "https://www.nzoi.org.nz/nzic/about/"
+      ]
+    }
+  ],
+  "history": []
+}
