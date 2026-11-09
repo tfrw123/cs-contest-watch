@@ -1,6 +1,6 @@
 {
   "season": "2026–2027",
-  "lastChecked": null,
+  "lastChecked": "2026-11-09T08:23:36Z",
   "contests": [
     {
       "key": "USACO",
@@ -13,7 +13,7 @@
       "season": "2026–2027 赛程待官方公布",
       "shortDeadline": "无统一截止",
       "shortSeason": "赛程 TBD",
-      "regText": "常年可创建个人账号；无需赛季预注册。2026–2027 正式赛程尚未公布。",
+      "regText": "常年可创建个人账号；无需赛季预注册。2026–2027 官方赛程尚未检测到明确赛程标题。",
       "eligibility": "在线竞赛对所有人开放。所有新参赛者从 Bronze 开始。只有美国境内的 pre-college 学生才具备参加 USACO Training Camp 与代表美国参加 IOI / EGOI 选拔的资格；国际参赛者可参加常规赛，但与美国学生的官方选拔资格不同。",
       "rounds": "学年内通常举办多场线上比赛与 US Open，但 2026–2027 具体场次与日期尚未正式公布，本页不使用往年赛程替代。",
       "groups": "Bronze、Silver、Gold、Platinum。新参赛者从 Bronze 起步，通过比赛达到晋级线后升组。",
