@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>CS Contest Watch v8</title>
+<title>CS Contest Watch </title>
 <style>
 :root{--ink:#172743;--muted:#6d7f9d;--line:#e4ebf5;--bg:#f4f7fc;--blue:#3978ed;--green:#159b68;--amber:#d78b18;--pink:#d34d9b;--purple:#8664dc}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
@@ -26,7 +26,7 @@ footer{color:#8795aa;font-size:11px;margin-top:18px;line-height:1.7}
 dialog{border:0;border-radius:20px;max-width:720px;width:calc(100% - 28px);padding:0;box-shadow:0 24px 80px #13274344;color:var(--ink)}dialog::backdrop{background:#14233b88}.modal{padding:24px}.modal-head{display:flex;align-items:center;gap:14px}.modal-head .logo{width:56px;height:56px}.modal h2{margin:0;font-size:22px}.modal p{line-height:1.7;color:#526783;font-size:13px}.modal h3{font-size:14px;margin:18px 0 5px}.modal a{color:#346fc7}.close{float:right}
 @media(max-width:900px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}.top{flex-direction:column}}@media(max-width:580px){.shell{padding:22px 14px}.cards{grid-template-columns:1fr}.panel{padding:14px}.months{margin-left:135px}.track{grid-template-columns:135px 1fr}.race{gap:7px}.logo{width:32px;height:32px}.race strong{font-size:12px}}
 </style></head><body><main class="shell">
-<header class="top"><div><h1>CS Contest Watch <span style="color:#8192ad;font-size:16px">v8</span></h1><div class="sub">六项计算机竞赛 · 官方赛程追踪 · 自动变更历史</div></div><div class="actions"><button onclick="location.reload()">↻ 刷新数据</button><button class="primary" id="export">导出 Timeline PNG</button></div></header>
+<header class="top"><div><h1>CS Contest Watch </h1><div class="sub">六项计算机竞赛 · 官方赛程追踪 · 自动变更历史</div></div><div class="actions"><button onclick="location.reload()">↻ 刷新数据</button><button class="primary" id="export">导出 Timeline PNG</button></div></header>
 <div class="meta"><span class="dot"></span><span id="update">正在读取监测数据…</span><span>·</span><span>USACO 30 分钟 / 其他赛事 6 小时检查</span></div>
 <section class="panel"><div class="section-head"><h2>2026–2027 赛季 Timeline</h2><div class="legend"><span class="key"><i class="swatch" style="background:#5a94f3"></i>比赛窗口</span><span class="key"><i class="swatch" style="background:#d99521"></i>报名截止</span><span class="key"><i class="swatch" style="background:#21a477"></i>比赛日</span><span class="key"><i class="swatch" style="background:#d65c9d"></i>待公布</span></div></div><div class="timeline-wrap"><div class="timeline" id="timeline"></div></div></section>
 <section class="cards" id="cards"></section>
