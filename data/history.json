@@ -1,5 +1,16 @@
 [
   {
+    "id": "USACO-20261109T090400Z",
+    "contest": "USACO",
+    "type": "official_page_changed",
+    "detectedAt": "2026-11-09T09:04:00Z",
+    "url": "https://usaco.org/",
+    "message": "USACO 官方页面内容发生变化；请核对是否涉及报名或赛程日期。",
+    "previousHash": "1a0232aab0ac99c4a71e388a224067aa073957a3e64fc4af479c02d3bb603eea",
+    "currentHash": "7248bec83f96cb1a167d5ebe442b66f17b80e384f4eb919542d0074a3d85439c",
+    "lastModified": null
+  },
+  {
     "id": "USACO-20261109T084017Z",
     "contest": "USACO",
     "type": "official_page_changed",
