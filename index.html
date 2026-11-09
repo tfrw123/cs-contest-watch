@@ -11,10 +11,48 @@ button.primary{background:#1d3154;color:white;border-color:#1d3154}.meta{display
 .dot{width:8px;height:8px;border-radius:50%;background:var(--green);display:inline-block}.panel{background:#fff;border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:0 10px 32px #243b6010}
 .section-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:16px}.section-head h2{font-size:17px;margin:0}.legend{display:flex;gap:14px;flex-wrap:wrap;color:var(--muted);font-size:12px}
 .key{display:inline-flex;align-items:center;gap:6px}.swatch{width:9px;height:9px;border-radius:3px;background:var(--blue)}
-.timeline-wrap{overflow-x:auto;padding-bottom:6px}.timeline{min-width:900px}.months{display:grid;grid-template-columns:repeat(11,minmax(0,1fr));margin-left:190px;gap:5px}
+.timeline-wrap{overflow-x:auto;padding-bottom:6px}.timeline{min-width:900px}.months{display:grid;grid-template-columns:repeat(11,minmax(0,1fr));margin-left:140px;gap:5px}
 .month{background:#f0f5fc;border:1px solid #e0e9f6;border-radius:9px;text-align:center;padding:9px 2px;font-size:12px;font-weight:700;color:#526783}
-.track{display:grid;grid-template-columns:190px 1fr;min-height:88px;border-bottom:1px solid #edf1f7}.track:last-child{border-bottom:0}.race{display:flex;align-items:center;gap:12px;padding:12px 16px 12px 4px}
-.logo{width:42px;height:42px;object-fit:contain;border-radius:9px;background:#fff;flex:none}.race strong{display:block;font-size:14px}.race small{display:block;color:var(--muted);font-size:11px;margin-top:4px}
+.track{display:grid;grid-template-columns:140px 1fr;min-height:88px;border-bottom:1px solid #edf1f7}.track:last-child{border-bottom:0}
+.race{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  gap:8px;
+  padding:10px 6px;
+  text-align:center;
+  overflow:hidden;
+}
+
+.race strong{
+  font-size:15px;
+  line-height:1.3;
+}
+
+.race small{
+  font-size:11px;
+  margin-top:0;
+}
+
+.logo{
+  width:64px;
+  height:48px;
+  object-fit:contain;
+  border-radius:6px;
+  background:transparent;
+  flex:none;
+  transform:none !important;
+  max-width:64px;
+  max-height:48px;
+}
+
+.race .logo{
+  width:64px !important;
+  height:48px !important;
+  transform:none !important;
+}
+.race strong{display:block;font-size:14px}.race small{display:block;color:var(--muted);font-size:11px;margin-top:4px}
 .lane{position:relative;display:grid;grid-template-columns:repeat(11,minmax(0,1fr));align-items:center;background-image:linear-gradient(to right,#edf2f8 1px,transparent 1px);background-size:calc(100% / 11) 100%}
 .event{grid-column:var(--start)/var(--end);margin:4px 3px;padding:8px 10px;border-radius:10px;border:1px solid var(--c);background:var(--fill);color:var(--txt);font-size:11px;line-height:1.3;font-weight:700;min-width:0;overflow-wrap:anywhere;position:relative}
 .event.deadline{--c:#d99521;--fill:#fff4df;--txt:#85530b}.event.window{--c:#5a94f3;--fill:#e8f1ff;--txt:#244c87}.event.contest{--c:#21a477;--fill:#e4f7ef;--txt:#176548}.event.expected,.event.unknown{--c:#d65c9d;--fill:#fff0f7;--txt:#90416d;border-style:dashed}
@@ -25,6 +63,28 @@ button.primary{background:#1d3154;color:white;border-color:#1d3154}.meta{display
 footer{color:#8795aa;font-size:11px;margin-top:18px;line-height:1.7}
 dialog{border:0;border-radius:20px;max-width:720px;width:calc(100% - 28px);padding:0;box-shadow:0 24px 80px #13274344;color:var(--ink)}dialog::backdrop{background:#14233b88}.modal{padding:24px}.modal-head{display:flex;align-items:center;gap:14px}.modal-head .logo{width:56px;height:56px}.modal h2{margin:0;font-size:22px}.modal p{line-height:1.7;color:#526783;font-size:13px}.modal h3{font-size:14px;margin:18px 0 5px}.modal a{color:#346fc7}.close{float:right}
 @media(max-width:900px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}.top{flex-direction:column}}@media(max-width:580px){.shell{padding:22px 14px}.cards{grid-template-columns:1fr}.panel{padding:14px}.months{margin-left:135px}.track{grid-template-columns:135px 1fr}.race{gap:7px}.logo{width:32px;height:32px}.race strong{font-size:12px}}
+/* 放大赛事 Logo */
+img.logo[alt="USACO"] {
+  width: 110px !important;
+  height: 78px !important;
+  max-width: none !important;
+  object-fit: contain !important;
+  transform: none !important;
+}
+
+img.logo[alt="ACSL"] {
+  width: 110px !important;
+  height: 78px !important;
+  max-width: none !important;
+  object-fit: contain !important;
+}
+
+img.logo[alt="CCC"] {
+  width: 100px !important;
+  height: 70px !important;
+  max-width: none !important;
+  object-fit: contain !important;
+}
 </style></head><body><main class="shell">
 <header class="top"><div><h1>CS Contest Watch </h1><div class="sub">六项计算机竞赛 · 官方赛程追踪 · 自动变更历史</div></div><div class="actions"><button onclick="location.reload()">↻ 刷新数据</button><button class="primary" id="export">导出 Timeline PNG</button></div></header>
 <div class="meta"><span class="dot"></span><span id="update">正在读取监测数据…</span><span>·</span><span>USACO 30 分钟 / 其他赛事 6 小时检查</span></div>
