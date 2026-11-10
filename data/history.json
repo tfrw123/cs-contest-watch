@@ -1,5 +1,49 @@
 [
   {
+    "id": "AIO-20261110T020519Z",
+    "contest": "AIO",
+    "type": "official_page_changed",
+    "detectedAt": "2026-11-10T02:05:19Z",
+    "url": "https://amt.edu.au/aio",
+    "message": "AIO 官方页面内容发生变化；请核对是否涉及报名或赛程日期。",
+    "previousHash": "91b7ba2f70270b5c00bdaa215d22a22216a19056b7d7ea2c1d8dc417be5720e5",
+    "currentHash": "96d60977169d80364ad44a1d9001a948decf722da0f8986c7168dda7e1e49832",
+    "lastModified": null
+  },
+  {
+    "id": "ACSL-20261110T020519Z",
+    "contest": "ACSL",
+    "type": "official_page_changed",
+    "detectedAt": "2026-11-10T02:05:19Z",
+    "url": "https://www.acsl.org/get-started/schedule",
+    "message": "ACSL 官方页面内容发生变化；请核对是否涉及报名或赛程日期。",
+    "previousHash": "3d7c45f007a7319cfdcd0fa78048f4e89a05b181b6caa963c162ec80a4485ecf",
+    "currentHash": "52a9daa69c1d02d194b3160e45d3f3dcf3591648502f3002faac7bf220cce39e",
+    "lastModified": null
+  },
+  {
+    "id": "ACSL-20261110T020519Z",
+    "contest": "ACSL",
+    "type": "official_page_changed",
+    "detectedAt": "2026-11-10T02:05:19Z",
+    "url": "https://www.acsl.org/Registration",
+    "message": "ACSL 官方页面内容发生变化；请核对是否涉及报名或赛程日期。",
+    "previousHash": "9e53c55c7dafa5efccec8a0541f7acd1a01e54d7742a5a64440b032ee266c5d8",
+    "currentHash": "26beb0a00d224aec14668469e34f6a5a9b58a9b4f89e974ff1e8aa8b7f2b1cc4",
+    "lastModified": null
+  },
+  {
+    "id": "USACO-20261110T020519Z",
+    "contest": "USACO",
+    "type": "official_page_changed",
+    "detectedAt": "2026-11-10T02:05:19Z",
+    "url": "https://usaco.org/",
+    "message": "USACO 官方页面内容发生变化；请核对是否涉及报名或赛程日期。",
+    "previousHash": "b97743ddd7566532deaf668e86dfe081add8322ef684db8a152d6fa1941843bf",
+    "currentHash": "2c245daebc5be62b7e3216807011b983c818be12c35ded9f29da540c0c2722af",
+    "lastModified": null
+  },
+  {
     "id": "AIO-20261109T190555Z",
     "contest": "AIO",
     "type": "official_page_changed",
