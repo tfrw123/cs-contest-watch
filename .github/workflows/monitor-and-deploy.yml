@@ -2,8 +2,8 @@ name: CS Contest Watch - Monitor and Deploy
 
 on:
   schedule:
-    # USACO checks run every 30 minutes.
-    - cron: "7,37 * * * *"
+    # Check official pages every 12 hours.
+    - cron: "17 */12 * * *"
   workflow_dispatch:
   push:
     branches: ["main"]
@@ -37,6 +37,9 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Validate Python syntax
+        run: python -m py_compile scripts/monitor.py
+
       - name: Check official contest pages
         run: python scripts/monitor.py
 
@@ -63,3 +66,4 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
