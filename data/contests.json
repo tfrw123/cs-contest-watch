@@ -1,6 +1,6 @@
 {
   "season": "2026–2027",
-  "lastChecked": "2026-11-10T02:05:19Z",
+  "lastChecked": "2026-11-10T03:52:13Z",
   "contests": [
     {
       "key": "USACO",
@@ -363,6 +363,17 @@
     }
   ],
   "history": [
+    {
+      "id": "USACO-20261110T035213Z",
+      "contest": "USACO",
+      "type": "official_page_changed",
+      "detectedAt": "2026-11-10T03:52:13Z",
+      "url": "https://usaco.org/",
+      "message": "USACO 官方页面内容发生变化；请核对是否涉及报名或赛程日期。",
+      "previousHash": "2c245daebc5be62b7e3216807011b983c818be12c35ded9f29da540c0c2722af",
+      "currentHash": "701777ab0d2d555277722b1db91077df4dadc65a7205a3149f0a5e4a67e45432",
+      "lastModified": null
+    },
     {
       "id": "AIO-20261110T020519Z",
       "contest": "AIO",
