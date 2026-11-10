@@ -63,27 +63,72 @@ button.primary{background:#1d3154;color:white;border-color:#1d3154}.meta{display
 footer{color:#8795aa;font-size:11px;margin-top:18px;line-height:1.7}
 dialog{border:0;border-radius:20px;max-width:720px;width:calc(100% - 28px);padding:0;box-shadow:0 24px 80px #13274344;color:var(--ink)}dialog::backdrop{background:#14233b88}.modal{padding:24px}.modal-head{display:flex;align-items:center;gap:14px}.modal-head .logo{width:56px;height:56px}.modal h2{margin:0;font-size:22px}.modal p{line-height:1.7;color:#526783;font-size:13px}.modal h3{font-size:14px;margin:18px 0 5px}.modal a{color:#346fc7}.close{float:right}
 @media(max-width:900px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}.top{flex-direction:column}}@media(max-width:580px){.shell{padding:22px 14px}.cards{grid-template-columns:1fr}.panel{padding:14px}.months{margin-left:135px}.track{grid-template-columns:135px 1fr}.race{gap:7px}.logo{width:32px;height:32px}.race strong{font-size:12px}}
-/* 放大赛事 Logo */
-img.logo[alt="USACO"] {
-  width: 110px !important;
-  height: 78px !important;
-  max-width: none !important;
-  object-fit: contain !important;
-  transform: none !important;
+.race img.logo{
+  object-fit:contain !important;
+  transform:none !important;
+  flex:none;
 }
 
-img.logo[alt="ACSL"] {
-  width: 110px !important;
-  height: 78px !important;
-  max-width: none !important;
-  object-fit: contain !important;
+.race img.logo[alt="USACO logo"]{
+  width:96px !important;height:66px !important;
+}
+.race img.logo[alt="ACSL logo"]{
+  width:110px !important;height:64px !important;
+}
+.race img.logo[alt="BCC logo"]{
+  width:84px !important;height:58px !important;
+}
+.race img.logo[alt="CCC logo"]{
+  width:104px !important;height:66px !important;
+}
+.race img.logo[alt="AIO logo"]{
+  width:86px !important;height:60px !important;
+}
+.race img.logo[alt="NZIC logo"]{
+  width:86px !important;height:60px !important;
+}
+/* ===== Timeline 左侧 Logo 放大 ===== */
+
+.race .logo{
+  max-width:none !important;
+  object-fit:contain !important;
+  flex-shrink:0 !important;
 }
 
-img.logo[alt="CCC"] {
-  width: 100px !important;
-  height: 70px !important;
-  max-width: none !important;
-  object-fit: contain !important;
+/* USACO */
+.race img.logo[alt="USACO logo"]{
+  width:100px !important;
+  height:72px !important;
+}
+
+/* ACSL */
+.race img.logo[alt="ACSL logo"]{
+  width:115px !important;
+  height:68px !important;
+}
+
+/* BCC */
+.race img.logo[alt="BCC logo"]{
+  width:95px !important;
+  height:68px !important;
+}
+
+/* CCC */
+.race img.logo[alt="CCC logo"]{
+  width:110px !important;
+  height:72px !important;
+}
+
+/* AIO */
+.race img.logo[alt="AIO logo"]{
+  width:95px !important;
+  height:68px !important;
+}
+
+/* NZIC */
+.race img.logo[alt="NZIC logo"]{
+  width:95px !important;
+  height:68px !important;
 }
 </style></head><body><main class="shell">
 <header class="top"><div><h1>CS Contest Watch </h1><div class="sub">六项计算机竞赛 · 官方赛程追踪 · 自动变更历史</div></div><div class="actions"><button onclick="location.reload()">↻ 刷新数据</button><button class="primary" id="export">导出 Timeline PNG</button></div></header>
