@@ -1,5 +1,5 @@
 {
-  "lastChecked": "2026-11-10T04:04:42Z",
+  "lastChecked": "2026-11-10T04:05:28Z",
   "sources": {
     "USACO": {
       "checkedAt": "2026-11-10T04:04:42Z",
@@ -118,9 +118,13 @@
       "errors": []
     }
   },
-  "scheduleParser": "USACO 2026–2027 explicit-heading parser",
+  "scheduleParser": "Dynamic current-season USACO / NZIC explicit-date parsers",
   "frequencyMinutes": {
-    "USACO": 30,
-    "others": 360
+    "USACO": 720,
+    "ACSL": 720,
+    "BCC": 720,
+    "CCC": 720,
+    "AIO": 720,
+    "NZIC": 720
   }
 }
