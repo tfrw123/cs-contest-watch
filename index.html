@@ -16,7 +16,7 @@ button.primary{background:#1d3154;color:white;border-color:#1d3154}.meta{display
 .track{display:grid;grid-template-columns:166px minmax(0,1fr);min-height:126px;border-bottom:1px solid #edf1f7;align-items:stretch}.track:last-child{border-bottom:0}.race{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;padding:12px 10px;text-align:center;min-width:0;overflow:visible}
 .logo{width:42px;height:42px;object-fit:contain;border-radius:9px;background:#fff;flex:none}.race .logo{width:132px;height:78px;object-fit:contain;object-position:center;background:#fff;border-radius:6px;flex:none;transform:none}.race-label{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:2px}.race strong{display:block;font-size:14px;line-height:1.2;color:var(--ink)}.race small{display:block;color:var(--muted);font-size:11px;margin-top:0;line-height:1.25}
 .lane{position:relative;display:grid;min-width:0;grid-template-columns:repeat(11,minmax(0,1fr));align-items:center;background-image:linear-gradient(to right,#edf2f8 1px,transparent 1px);background-size:calc(100% / 11) 100%}
-.lane{grid-auto-rows:minmax(54px,auto);row-gap:7px;padding:10px 0;align-content:center}.event{grid-column:var(--start)/var(--end);margin:0 3px;padding:8px 9px;border-radius:11px;border:1px solid var(--c);background:var(--fill);color:var(--txt);font-size:11px;line-height:1.25;font-weight:700;min-width:0;max-width:calc(100% - 6px);box-sizing:border-box;min-height:54px;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:3px;overflow:hidden;position:relative}.event-title{display:block;font-size:11px;line-height:1.25;font-weight:800;overflow-wrap:normal;word-break:normal}.event-date{display:block;font-size:10px;line-height:1.25;font-weight:650;overflow-wrap:normal;word-break:normal;opacity:.94}
+.lane{grid-auto-rows:minmax(54px,auto);row-gap:7px;padding:10px 0;align-content:center}.event{grid-column:var(--start)/var(--end);grid-row:auto;margin:0 3px;padding:8px 9px;border-radius:11px;border:1px solid var(--c);background:var(--fill);color:var(--txt);font-size:11px;line-height:1.25;font-weight:700;min-width:0;max-width:calc(100% - 6px);box-sizing:border-box;min-height:54px;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:3px;overflow:hidden;position:relative}.event-title{display:block;font-size:11px;line-height:1.25;font-weight:800;overflow-wrap:anywhere;word-break:normal}.event-date{display:block;font-size:10px;line-height:1.25;font-weight:650;overflow-wrap:anywhere;word-break:normal;opacity:.94}
 .event.reference{border-style:dashed;border-width:1.5px;background:#fff7fc;color:#9d3f79;border-color:#d65c9d;box-shadow:inset 0 0 0 1px rgba(214,92,157,.04)}
 .event.reference .event-title:before{content:none}
 .event.deadline{--c:#d99521;--fill:#fff4df;--txt:#85530b}.event.window{--c:#5a94f3;--fill:#e8f1ff;--txt:#244c87}.event.contest{--c:#21a477;--fill:#e4f7ef;--txt:#176548}.event.expected,.event.unknown{--c:#d65c9d;--fill:#fff0f7;--txt:#90416d;border-style:dashed}
@@ -27,6 +27,10 @@ button.primary{background:#1d3154;color:white;border-color:#1d3154}.meta{display
 footer{color:#8795aa;font-size:11px;margin-top:18px;line-height:1.7}
 dialog{border:0;border-radius:20px;max-width:720px;width:calc(100% - 28px);padding:0;box-shadow:0 24px 80px #13274344;color:var(--ink)}dialog::backdrop{background:#14233b88}.modal{padding:24px}.modal-head{display:flex;align-items:center;gap:14px}.modal-head .logo{width:56px;height:56px}.modal h2{margin:0;font-size:22px}.modal p{line-height:1.7;color:#526783;font-size:13px}.modal h3{font-size:14px;margin:18px 0 5px}.modal a{color:#346fc7}.close{float:right}
 @media(max-width:900px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}.top{flex-direction:column}}@media(max-width:580px){.shell{padding:22px 14px}.cards{grid-template-columns:1fr}.panel{padding:14px}.months{margin-left:150px}.track{grid-template-columns:150px minmax(0,1fr);min-height:116px}.race{gap:6px;padding:10px 6px}.race .logo{width:122px;height:70px}.logo{width:32px;height:32px}.race strong{font-size:12px}.event{font-size:10px;padding:7px 8px}.event-title{font-size:10px}.event-date{font-size:9px}}
+/* Shared logo box preserves the original embedded assets and aspect ratios. */
+.logo,.race .logo,.card-top .logo,.modal-head .logo{width:112px;height:68px;min-width:112px;max-width:112px;object-fit:contain;object-position:center;transform:none;border-radius:0;background:transparent}
+.race{overflow:visible}.card{min-width:0}.card-top{flex-wrap:wrap}.card-top>div{min-width:0;flex:1}.full{overflow-wrap:anywhere}.pill{white-space:normal;max-width:100%}.card-meta{flex-wrap:wrap}.card-meta span{min-width:0;overflow-wrap:anywhere}
+.event{overflow:visible;max-width:calc(100% - 6px);height:auto;min-height:64px}.event-title,.event-date{white-space:normal;overflow-wrap:anywhere}.lane{grid-auto-flow:row;grid-auto-rows:minmax(64px,auto);align-items:stretch}
 </style></head><body><main class="shell">
 <header class="top"><div><h1>CS Contest Watch</h1><div class="sub" id="subtitle">六项计算机竞赛 · 官方赛程追踪 · 自动变更历史</div></div><div class="actions"><button id="lang-toggle" type="button" aria-label="Switch language">EN</button><button id="refresh" type="button">↻ 刷新数据</button><button class="primary" id="export">导出时间轴 PNG</button></div></header>
 <div class="meta"><span class="dot"></span><span id="update">正在读取监测数据…</span><span>·</span><span id="monitor-note">USACO 每30分钟 / 其他赛事每6小时检查</span></div>
@@ -48,7 +52,7 @@ const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&
 const dateFmt=d=>d?new Date(d+"T00:00:00").toLocaleDateString("en-US",{month:"short",day:"numeric"}):"TBD";
 let LANG="zh";
 const I18N={
- zh:{subtitle:"六项计算机竞赛 · 官方赛程追踪 · 自动变更历史",refresh:"↻ 刷新数据",export:"导出时间轴 PNG",timeline:`${SEASON_LABEL} 赛季赛事时间表`,window:"比赛/答题时间",deadline:"报名/订购截止",contest:"正式比赛日",pending:"官方待公布",reference:"去年日期参考",history:"官方信息更新记录",historySub:"仅记录检测到的变化",footer:"日期仅在官方来源明确公布后显示；“待公布”表示官方尚未发布，不以往年日期推测。请以赛事官网及学校通知为准。",monitor:"USACO 与 NZOI/NZIC 每12小时检查官方赛程",modeSchool:"学校统一报名",modePersonal:"个人报名",dateUnknown:"日期待官方公布",statusOpen:"报名/订购截止未到",statusClosed:"报名/订购已截止",statusRunning:"比赛进行中",statusPending:"等待官方公布",noHistory:"暂无已记录的官方页面变化。监测任务运行后，变化会显示在这里。",source:"官方来源",close:"关闭 ✕",detailFields:["适合哪些学生 / 参赛资格","比赛轮次与赛制","组别","难度与考查内容","可使用的编程语言","比赛形式","如何报名"],registration:"报名方式：",cutoff:"报名截止：",season:"本赛季安排："},
+ zh:{subtitle:"六项计算机竞赛 · 官方赛程追踪 · 自动变更历史",refresh:"↻ 刷新数据",export:"导出时间轴 PNG",timeline:`${SEASON_LABEL} 赛季赛事时间表`,window:"比赛/答题时间",deadline:"报名/订购截止",contest:"正式比赛日",pending:"官方待公布",reference:"去年日期参考",history:"官方信息更新记录",historySub:"仅记录检测到的变化",footer:"实线为已公布日期，虚线“参考上一赛季赛程”为历史参考，并非本赛季官方确认；报名预计时间仍以官网为准。请以赛事官网及学校通知为准。",monitor:"USACO 与 NZOI/NZIC 每12小时检查官方赛程",modeSchool:"学校统一报名",modePersonal:"个人报名",dateUnknown:"日期待官方公布",statusOpen:"报名/订购截止未到",statusClosed:"报名/订购已截止",statusRunning:"比赛进行中",statusPending:"等待官方公布",noHistory:"暂无已记录的官方页面变化。监测任务运行后，变化会显示在这里。",source:"官方来源",close:"关闭 ✕",detailFields:["适合哪些学生 / 参赛资格","比赛轮次与赛制","组别","难度与考查内容","可使用的编程语言","比赛形式","如何报名"],registration:"报名方式：",cutoff:"报名截止：",season:"本赛季安排："},
  en:{subtitle:"Six computing competitions · Official schedule tracking · Change history",refresh:"↻ Refresh",export:"Export timeline PNG",timeline:`${SEASON_LABEL} Competition Calendar`,window:"Competition window",deadline:"Registration deadline",contest:"Competition day",pending:"To be announced",reference:"Last-year reference",history:"Official update history",historySub:"Only detected changes are listed",footer:"The season rolls forward automatically each calendar year. Until a new schedule is officially published, dashed bars show last season’s dates as references only; replace them with confirmed official dates when announced.",monitor:"USACO and NZOI/NZIC official schedules checked every 12 hours",modeSchool:"School registration",modePersonal:"Individual registration",dateUnknown:"Date to be announced",statusOpen:"Registration/order deadline upcoming",statusClosed:"Registration/order closed",statusRunning:"Competition in progress",statusPending:"Awaiting official announcement",noHistory:"No official page changes have been recorded yet. Detected changes will appear here after the monitoring workflow runs.",source:"Official source",close:"Close ✕",detailFields:["Who can participate / Eligibility","Rounds and format","Divisions","Difficulty and skills tested","Supported programming languages","Competition format","How to register"],registration:"Registration: ",cutoff:"Registration deadline: ",season:"Season schedule: "}
 };
 const EVENT_COPY={
@@ -86,64 +90,41 @@ const EN_DETAILS={
  NZIC:["Official ranking eligibility is for students currently enrolled at a New Zealand secondary or intermediate school. Others may participate but are not included in official rankings.","Three rounds are planned for 2027. Exact dates will be announced in early 2027. Each round usually has a one-week window and a three-hour attempt.","The current rules do not list separate grade divisions; ranking is based on individual and cumulative scores.","Ranges from introductory implementation to advanced algorithm problems. Subtask scoring allows partial credit.","C++, C, C#, Python, JavaScript, Java, Ruby, Haskell and others.","Individual online contest. Each round is available during a one-week window; once started, the participant has three hours. Collaboration and generative AI are prohibited by the rules.","Registration is expected to open in February 2027. The deadline and round dates have not yet been announced."]
 };
 const t=k=>I18N[LANG][k]||k;
-function status(c){let es=(c.events||[]).filter(e=>e.start);let now=new Date();if(es.some(e=>e.start<=now.toISOString().slice(0,10)&&e.end>=now.toISOString().slice(0,10)&&e.kind!=="deadline"))return [t("statusRunning"),"running"];let d=es.find(e=>e.kind==="deadline");if(d){let dt=new Date(d.end+"T23:59:59");return dt>=now?[t("statusOpen"),"open"]:[t("statusClosed"),"closed"]}return [t("statusPending"),"neutral"]}
+function status(c){let es=(c.events||[]).filter(e=>e.start&&!e.reference&&e.kind!=="reference");let now=new Date();if(es.some(e=>e.start<=now.toISOString().slice(0,10)&&e.end>=now.toISOString().slice(0,10)&&e.kind!=="deadline"))return [t("statusRunning"),"running"];let d=es.find(e=>e.kind==="deadline");if(d){let dt=new Date(d.end+"T23:59:59");return dt>=now?[t("statusOpen"),"open"]:[t("statusClosed"),"closed"]}return [t("statusPending"),"neutral"]}
 function eventCopy(e){
- let c=EVENT_COPY[e.id];
- if(e.kind==="reference" && /^(usaco-r[123]|nzic-r[123]|usaco-open)$/.test(e.id)){
-  const n=e.id.match(/r([123])$/)?.[1];
-  const label=LANG==="zh"?`参考${SEASON_START_YEAR}年赛程 · ${n?`第${n}轮`:"US Open"}`:`${SEASON_START_YEAR} schedule reference · ${n?`Round ${n}`:"US Open"}`;
-  const fmt=d=>{const x=new Date(d+"T00:00:00");return LANG==="zh"?`${x.getMonth()+1}月${x.getDate()}日`:x.toLocaleDateString("en-US",{month:"short",day:"numeric"});};
-  const date=e.start?(e.start===e.end?fmt(e.start):`${fmt(e.start)}–${fmt(e.end)}`):"";
-  return [label,date];
+ const fmt=d=>LANG==="zh"?d.replace(/-/g,"/"):new Date(d+"T00:00:00").toLocaleDateString("en-US",{year:"numeric",month:"short",day:"numeric"});
+ if(e.id==="nzic-open" && e.kind==="expected") return LANG==="zh"?["预计开放报名","2027年2月（官网预计）"]:["Registration expected to open","Feb 2027 (official estimate)"];
+ if(e.reference||e.kind==="reference"){
+  const dates=e.referenceStart||e.start, end=e.referenceEnd||e.end;
+  return [LANG==="zh"?"参考上一赛季赛程":"Previous-season schedule reference",dates?(dates===end?fmt(dates):`${fmt(dates)}–${fmt(end)}`):""];
  }
- if(c){
-  const copy=[...c[LANG]];
-  if(e.start && e.kind==="reference"){
-   const fmt=d=>{const x=new Date(d+"T00:00:00");return LANG==="zh"?`${x.getMonth()+1}月${x.getDate()}日`:x.toLocaleDateString("en-US",{month:"short",day:"numeric"});};
-   copy[1]=e.start===e.end?fmt(e.start):`${fmt(e.start)}–${fmt(e.end)}`;
-  }
-  return copy;
- }
- if(e.id==="nzic-open") return LANG==="zh"?["预计开放报名","2027年2月（官网预计）"]:["Registration expected to open","Feb 2027 (official estimate)"];
- return [e.label||"",""];
+ if(e.start) return [e.confirmed?e.label:(EVENT_COPY[e.id]?.[LANG]?.[0]||e.label),e.start===e.end?fmt(e.start):`${fmt(e.start)}–${fmt(e.end)}`];
+ return EVENT_COPY[e.id]?.[LANG]||[e.label||"",""];
 }
 function modeText(c){return c.mode&&c.mode.includes("个人")?t("modePersonal"):t("modeSchool")}
 function logo(k){return LOGOS[k]?`<img class="logo logo-${k.toLowerCase()}" src="${LOGOS[k]}" alt="${k} logo">`:`<div class="logo" style="display:grid;place-items:center;font-weight:800">${k}</div>`}
 function monthIndex(date){let d=new Date(date+"T00:00:00");return (d.getFullYear()-SEASON_START_YEAR)*12+d.getMonth()-9}
 function seasonView(){
- const storedYear=Number(String(DATA.season||"2026").match(/20\\d{2}/)?.[0]||BASE_SEASON_YEAR);
- const shift=SEASON_START_YEAR-storedYear;
- const contests=(DATA.contests||[]).map(c=>{
-  let sourceEvents=[...(c.events||[])];
-  if(c.key==="USACO"||c.key==="NZIC"){
-   const hasPublishedDates=sourceEvents.some(e=>e.start&&e.kind!=="reference"&&e.kind!=="unknown");
-   if(!hasPublishedDates){
-    const refContest=FALLBACK.contests.find(x=>x.key===c.key);
-    const refs=(refContest?.events||[]).filter(e=>e.reference);
-    sourceEvents=[...sourceEvents,...refs.filter(r=>!sourceEvents.some(e=>e.id===r.id))];
-   }
-   if(c.key==="NZIC"){
-    const officialExpected=FALLBACK.contests.find(x=>x.key==="NZIC").events.find(e=>e.id==="nzic-open");
-    if(!sourceEvents.some(e=>e.id==="nzic-open")) sourceEvents.unshift(officialExpected);
-   }
-  }
-  const events=sourceEvents.map(e=>{
-   const move=d=>{
-    if(!d)return d;
-    const x=new Date(d+"T00:00:00");
-    x.setFullYear(x.getFullYear()+shift);
-    return `${x.getFullYear()}-${String(x.getMonth()+1).padStart(2,"0")}-${String(x.getDate()).padStart(2,"0")}`;
-   };
-   const isOldSeason=shift>0&&!e.fixedDate;
-   return {
-    ...e,
-    start:e.fixedDate?e.start:move(e.start),
-    end:e.fixedDate?e.end:move(e.end),
-    month:e.fixedDate?e.month:(e.month?move(e.month+"-01").slice(0,7):e.month),
-    reference:!!e.reference||isOldSeason,
-    kind:(e.reference||isOldSeason)?"reference":e.kind
-   };
+ const storedYear=Number(String(DATA.season||BASE_SEASON_YEAR).match(/20\d{2}/)?.[0]||BASE_SEASON_YEAR);
+ const move=(d,shift)=>{if(!d)return d;const x=new Date(d+"T00:00:00");x.setFullYear(x.getFullYear()+shift);return `${x.getFullYear()}-${String(x.getMonth()+1).padStart(2,"0")}-${String(x.getDate()).padStart(2,"0")}`};
+ const contests=DATA.contests.map(c=>{
+  const year=c.scheduleSeasonYear||storedYear;
+  const published=(c.events||[]).filter(e=>e.start&&!e.reference&&!["reference","unknown","expected"].includes(e.kind));
+  const current=year===SEASON_START_YEAR;
+  let events=(c.events||[]).filter(e=>!e.reference&&e.kind!=="reference").map(e=>{
+   if(current||e.fixedDate||e.id==="nzic-open")return {...e};
+   return {...e,start:move(e.start,SEASON_START_YEAR-year),end:move(e.end,SEASON_START_YEAR-year),reference:true,kind:"reference",referenceStart:e.start,referenceEnd:e.end};
   });
+  if(["USACO","NZIC"].includes(c.key)){
+   if(current&&published.length){events=events.filter(e=>e.kind!=="unknown");}
+   else {
+    events=events.filter(e=>!e.start);
+    const refs=published.length?published:(FALLBACK.contests.find(x=>x.key===c.key)?.events||[]).filter(e=>e.reference);
+    events.push(...refs.map(e=>{const base=published.length?year:BASE_SEASON_YEAR;const original=e.referenceStart||move(e.start,-1);const originalEnd=e.referenceEnd||move(e.end,-1);return {...e,kind:"reference",reference:true,referenceStart:published.length?e.start:original,referenceEnd:published.length?e.end:originalEnd,start:move(e.start,SEASON_START_YEAR-base),end:move(e.end,SEASON_START_YEAR-base)};}));
+    if(events.some(e=>e.reference))events=events.filter(e=>e.kind!=="unknown");
+   }
+   if(c.key==="NZIC"&&!events.some(e=>e.id==="nzic-open"))events.unshift({...FALLBACK.contests.find(x=>x.key==="NZIC").events.find(e=>e.id==="nzic-open"),fixedDate:true});
+  }
   return {...c,events};
  });
  return {...DATA,season:SEASON_LABEL,contests};
@@ -155,12 +136,12 @@ function render(){
  document.querySelectorAll(".legend .key").forEach((el,i)=>{el.lastChild.textContent=[t("window"),t("deadline"),t("contest"),t("pending"),t("reference")][i]||el.lastChild.textContent});
  document.getElementById("update").textContent=(LANG==="zh"?"最近检查：":"Last checked: ")+(VIEW.lastChecked|| (LANG==="zh"?"尚无自动检查记录":"No automated check recorded"));
  const months=Array.from({length:11},(_,i)=>{const d=new Date(SEASON_START_YEAR,9+i,1);return LANG==="zh"?(i===0?`${SEASON_START_YEAR}年10月`:d.getMonth()===0?`${SEASON_START_YEAR+1}年1月`:`${d.getMonth()+1}月`):d.toLocaleDateString("en-US",{month:"short",year:(i===0||d.getMonth()===0)?"numeric":undefined})});
- document.getElementById("timeline").innerHTML=`<div class="months">${months.map(m=>`<div class="month">${m}</div>`).join("")}</div>`+KEYS.map(k=>{let c=VIEW.contests.find(x=>x.key===k);if(!c)return "";let events=(c.events||[]).map(e=>{let a=e.start?Math.max(0,monthIndex(e.start)):4;let b=e.end?Math.min(12,monthIndex(e.end)+1):12;if(e.month){a=Math.max(0,monthIndex(e.month+"-01"));b=a+1}let cp=eventCopy(e);return `<div class="event ${esc(e.kind)}" style="--start:${a+1};--end:${Math.max(a+1,b)+1}" title="${esc(cp.join(" · "))}"><span class="event-title">${esc(cp[0])}</span><span class="event-date">${esc(cp[1])}</span></div>`}).join("");return `<div class="track"><div class="race">${logo(k)}<div class="race-label"><strong>${k}</strong><small>${esc(modeText(c))}</small></div></div><div class="lane">${events}</div></div>`}).join("");
+ document.getElementById("timeline").innerHTML=`<div class="months">${months.map(m=>`<div class="month">${m}</div>`).join("")}</div>`+KEYS.map(k=>{let c=VIEW.contests.find(x=>x.key===k);if(!c)return "";let events=(c.events||[]).filter(e=>!e.start||(monthIndex(e.end||e.start)>=0&&monthIndex(e.start)<11)).map(e=>{let a=e.start?Math.max(0,monthIndex(e.start)):4;let b=e.end?Math.min(11,monthIndex(e.end)+1):11;if(e.month){a=Math.max(0,monthIndex(e.month+"-01"));b=a+1}let cp=eventCopy(e);return `<div class="event ${esc(e.kind)}" style="--start:${a+1};--end:${Math.min(12,Math.max(a+1,b)+1)}" title="${esc(cp.join(" · "))}"><span class="event-title">${esc(cp[0])}</span><span class="event-date">${esc(cp[1])}</span></div>`}).join("");return `<div class="track"><div class="race">${logo(k)}<div class="race-label"><strong>${k}</strong><small>${esc(modeText(c))}</small></div></div><div class="lane">${events}</div></div>`}).join("");
  document.getElementById("cards").innerHTML=KEYS.map(k=>{let c=VIEW.contests.find(x=>x.key===k);if(!c)return "";let [label,cl]=status(c),cardDates=LANG==="en"?CARD_EN[k]:[c.deadline||"待公布",c.shortSeason||"待公布"];return `<article class="card" data-key="${k}"><div class="card-top">${logo(k)}<div><h3>${k}</h3><div class="full">${esc(c.full)}</div></div><span class="pill ${cl}">${label}</span></div><div class="mode">${t("registration")}${esc(modeText(c))}</div><div class="card-meta"><span>${t("cutoff")}${esc(cardDates[0])}</span><span>${t("season")}${esc(cardDates[1])}</span></div></article>`}).join("");
  document.querySelectorAll(".card").forEach(el=>el.onclick=()=>showDetail(el.dataset.key));
  let hist=DATA.history||[];document.getElementById("history").innerHTML=hist.length?hist.slice(0,30).map(h=>`<div class="history-item"><span><b>${esc(h.contest)}</b> · ${esc(h.message||h.type)}</span><span><a href="${esc(h.url||"#")}" target="_blank" rel="noreferrer">${t("source")} ↗</a><br>${esc(h.detectedAt||"")}</span></div>`).join(""):`<div class="empty">${t("noHistory")}</div>`;
 }
-function showDetail(k){let c=VIEW.contests.find(x=>x.key===k);if(!c)return;let fields=LANG==="en"?EN_DETAILS[k]:[c.eligibility,c.rounds,c.groups,c.difficulty,c.languages,c.format,c.regText];document.getElementById("detail-body").innerHTML=`<div class="modal-head">${logo(k)}<div><h2>${k}</h2><div class="sub">${esc(c.full)}</div></div></div>`+fields.map((v,i)=>`<h3>${t("detailFields")[i]}</h3><p>${esc(v|| (LANG==="zh"?"官方信息待核实":"Awaiting official information"))}</p>`).join("")+`<h3>${LANG==="zh"?"关键日期":"Key dates"}</h3><p>${(c.events||[]).map(e=>esc(eventCopy(e).join(" · "))).join("<br>")||"TBD"}</p><h3>${t("source")}</h3><p>${(c.links||[]).map(([a,u])=>`<a href="${esc(u)}" target="_blank" rel="noreferrer">${LANG==="en"?({"官方报名页":"Official registration","官方赛程":"Official schedule","组别说明":"Divisions","官方 FAQ":"Official FAQ","BCC 官方赛事页":"Official BCC page","CCC 官方赛事页":"Official CCC page","AIO 官方赛事页":"Official AIO page","NZIC 官方赛事页":"Official NZIC page","NZIC 官方规则":"Official NZIC rules","NZOI 介绍":"NZOI overview","账号注册":"Account registration","官方规则与资格":"Official rules and eligibility","CEMC 官网":"CEMC website","AMT 竞赛门户":"AMT competition portal"}[a]||a):a} ↗</a>`).join("<br>")}</p>`;document.getElementById("detail").showModal()}
+function showDetail(k){let c=seasonView().contests.find(x=>x.key===k);if(!c)return;let fields=LANG==="en"?EN_DETAILS[k]:[c.eligibility,c.rounds,c.groups,c.difficulty,c.languages,c.format,c.regText];document.getElementById("detail-body").innerHTML=`<div class="modal-head">${logo(k)}<div><h2>${k}</h2><div class="sub">${esc(c.full)}</div></div></div>`+fields.map((v,i)=>`<h3>${t("detailFields")[i]}</h3><p>${esc(v|| (LANG==="zh"?"官方信息待核实":"Awaiting official information"))}</p>`).join("")+`<h3>${LANG==="zh"?"关键日期":"Key dates"}</h3><p>${(c.events||[]).map(e=>esc(eventCopy(e).join(" · "))).join("<br>")||"TBD"}</p><h3>${t("source")}</h3><p>${(c.links||[]).map(([a,u])=>`<a href="${esc(u)}" target="_blank" rel="noreferrer">${LANG==="en"?({"官方报名页":"Official registration","官方赛程":"Official schedule","组别说明":"Divisions","官方 FAQ":"Official FAQ","BCC 官方赛事页":"Official BCC page","CCC 官方赛事页":"Official CCC page","AIO 官方赛事页":"Official AIO page","NZIC 官方赛事页":"Official NZIC page","NZIC 官方规则":"Official NZIC rules","NZOI 介绍":"NZOI overview","账号注册":"Account registration","官方规则与资格":"Official rules and eligibility","CEMC 官网":"CEMC website","AMT 竞赛门户":"AMT competition portal"}[a]||a):a} ↗</a>`).join("<br>")}</p>`;document.getElementById("detail").showModal()}
 async function load(){try{let r=await fetch("./data/contests.json",{cache:"no-store"});if(r.ok)DATA=await r.json()}catch(e){}try{let h=await fetch("./data/history.json",{cache:"no-store"});if(h.ok)DATA.history=await h.json()}catch(e){}render()}
 async function exportTimelinePNG(){
  const btn=document.getElementById("export"), timeline=document.getElementById("timeline");
@@ -212,3 +193,4 @@ document.getElementById("refresh").addEventListener("click",load);
 document.getElementById("lang-toggle").addEventListener("click",()=>{LANG=LANG==="zh"?"en":"zh";render()});
 load();
 </script></body></html>
+
