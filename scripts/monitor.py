@@ -1,11 +1,5 @@
 #!/usr/bin/env python3
-"""Official contest-site monitor for CS Contest Watch v8.
-
-USACO is checked on every workflow run (scheduled every 30 minutes).
-The other five official sites are checked at most once every six hours.
-USACO season dates are parsed only from a matching 2026-2027 schedule heading.
-Unknown dates are never inferred from previous seasons.
-"""
+"""Monitor official pages every 12 hours; only explicit current-season dates are confirmed."""
 from __future__ import annotations
 import hashlib, json, re, urllib.request
 from datetime import datetime, timezone, timedelta
@@ -30,9 +24,14 @@ class TextExtractor(HTMLParser):
     def __init__(self):
         super().__init__()
         self.parts=[]
+        self.hidden=0
+    def handle_starttag(self, tag, attrs):
+        if tag in ("script", "style", "noscript"): self.hidden += 1
+    def handle_endtag(self, tag):
+        if tag in ("script", "style", "noscript"): self.hidden = max(0, self.hidden-1)
     def handle_data(self, data):
         t=" ".join(data.split())
-        if t:
+        if t and not self.hidden:
             self.parts.append(t)
     def text(self):
         return "\n".join(self.parts)
@@ -71,42 +70,55 @@ def parse_month(token):
     months={"jan":1,"feb":2,"mar":3,"apr":4,"may":5,"jun":6,"jul":7,"aug":8,"sep":9,"oct":10,"nov":11,"dec":12}
     return months[token[:3].lower()]
 
-def season_year(month):
-    # The 2026-2027 academic season's winter/spring events occur in 2027.
-    return 2026 if month >= 9 else 2027
+def current_season_year(now=None):
+    return (now or datetime.now(timezone.utc)).year
 
-def parse_usaco_schedule(text):
-    # Require an explicit season heading. Never parse the previous season as a fallback.
-    heading=re.search(r"2026\s*[-–/]\s*2027\s+(?:Competition\s+)?Schedule", text, re.I)
-    if not heading:
-        return None
-    tail=text[heading.end():]
-    # Restrict parsing to the current schedule block.
-    stop=re.search(r"(?:2027\s*[-–/]\s*2028\s+Schedule|Our Mission|Excellent Results|2026\s+Finalists)", tail, re.I)
-    block=tail[:stop.start()] if stop else tail[:2500]
+MONTH = r"(?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)"
+
+def parse_usaco_schedule(text, year=None):
+    year = year or current_season_year()
+    heading = re.search(rf"{year}\s*[-–—/]\s*{year+1}\s+(?:Competition\s+)?Schedule(?!\s+Recap)", text, re.I)
+    if not heading: return None
+    block = text[heading.end():]
+    stop = re.search(r"(?:20\d{2}\s*[-–—/]\s*20\d{2}\s+(?:Competition\s+)?Schedule|Our Mission|Our Sponsors|Finalists Announced|Excellent Results)", block, re.I)
+    block = block[:stop.start()] if stop else block[:2500]
+    pattern = rf"\b({MONTH})\s+(\d{{1,2}})(?:\s*[-–—]\s*(?:({MONTH})\s*)?(\d{{1,2}}))?\s*:\s*([^\n]+)"
     rows=[]
-    line_pattern=re.compile(
-        r"\b(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+(\d{1,2})"
-        r"(?:\s*[-–]\s*(?:(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s*)?(\d{1,2}))?"
-        r"\s*:\s*([^\n]+)", re.I)
-    for match in line_pattern.finditer(block):
-        sm=parse_month(match.group(1)); sd=int(match.group(2))
-        em=parse_month(match.group(3)) if match.group(3) else sm
-        ed=int(match.group(4)) if match.group(4) else sd
-        label=match.group(5).strip(" .;")
-        sy=season_year(sm); ey=season_year(em)
-        start=f"{sy:04d}-{sm:02d}-{sd:02d}"
-        end=f"{ey:04d}-{em:02d}-{ed:02d}"
-        kind="contest"
-        low=label.lower()
-        if "open" in low: kind="contest"
-        rows.append({
-            "id":"usaco-"+re.sub(r"[^a-z0-9]+","-",label.lower()).strip("-"),
-            "label":f"{label} · {start[5:]}–{end[5:]}" if start!=end else f"{label} · {start[5:]}",
-            "kind":kind,"start":start,"end":end,
-            "source":"https://usaco.org/"
-        })
+    for m in re.finditer(pattern, block, re.I):
+        sm=parse_month(m[1]); em=parse_month(m[3]) if m[3] else sm
+        try:
+            start=datetime(year if sm>=9 else year+1,sm,int(m[2])).date().isoformat()
+            end=datetime(year if em>=9 else year+1,em,int(m[4] or m[2])).date().isoformat()
+        except ValueError: return None
+        if end < start: return None
+        label=m[5].strip(" .;")
+        rows.append({"id":"usaco-"+re.sub(r"[^a-z0-9]+","-",label.lower()).strip("-"), "label":label,
+                     "kind":"contest","start":start,"end":end,"source":SOURCES["USACO"][0],
+                     "confirmed":True,"seasonYear":year})
     return rows or None
+
+def parse_nzic_schedule(text, year=None):
+    target=(year or current_season_year())+1
+    # Never cross the historical/reference section into last year's date list.
+    intro=re.search(rf"NZIC\s+{target}\b",text,re.I)
+    if not intro: return None
+    block=text[intro.start():]
+    stop=re.search(r"(?:For reference|previous (?:year|season)|last (?:year|season)|NZIC\s+"+str(target-1)+r"\b)",block,re.I)
+    if stop: block=block[:stop.start()]
+    if re.search(r"schedule will be announced|dates? (?:are |is )?(?:TBD|to be announced)",block,re.I): return None
+    # Official NZIC format: Monday 23 March - Sunday 29 March.
+    day=r"(?:(?:Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)\s+)?"
+    pattern=rf"{day}(\d{{1,2}})\s+({MONTH})(?:\s+{target})?\s*[-–—]\s*{day}(\d{{1,2}})\s+({MONTH})(?:\s+{target})?"
+    rows=[]
+    for i,m in enumerate(re.finditer(pattern,block,re.I),1):
+        try:
+            start=datetime(target,parse_month(m[2]),int(m[1])).date().isoformat()
+            end=datetime(target,parse_month(m[4]),int(m[3])).date().isoformat()
+        except ValueError: return None
+        if end < start: return None
+        rows.append({"id":f"nzic-r{i}","label":f"Round {i}","kind":"contest","start":start,"end":end,
+                     "source":SOURCES["NZIC"][0],"confirmed":True,"seasonYear":target-1})
+    return rows if len(rows)==3 else None
 
 def main():
     now=datetime.now(timezone.utc)
@@ -119,10 +131,10 @@ def main():
 
     for key, urls in SOURCES.items():
         previous=source_state.get(key,{})
-        if key!="USACO" and previous.get("checkedAt"):
+        if previous.get("checkedAt"):
             try:
                 last=datetime.fromisoformat(previous["checkedAt"].replace("Z","+00:00"))
-                if now-last < timedelta(hours=6):
+                if now-last < timedelta(hours=12):
                     continue
             except Exception:
                 pass
@@ -147,41 +159,40 @@ def main():
             except Exception as exc:
                 page_results.append({"url":url,"checkedAt":now_iso,"error":str(exc)[:400]})
 
-        pages={p["url"]:p for p in page_results if "sha256" in p}
-        source_state[key]={"checkedAt":now_iso,"pages":pages,"errors":[p for p in page_results if "error" in p]}
+        pages=dict(previous.get("pages",{}))
+        pages.update({p["url"]:p for p in page_results if "sha256" in p})
+        errors=[p for p in page_results if "error" in p]
+        source_state[key]={"checkedAt":now_iso,"pages":pages,"errors":errors,"errorHistory":(previous.get("errorHistory",[])+errors)}
+        for error in errors: print(f"{key}: {error['url']}: {error['error']}")
 
-        if key=="USACO":
-            page=next((p for p in page_results if p.get("url")=="https://usaco.org/" and "text" in p),None)
-            parsed=parse_usaco_schedule(page["text"]) if page else None
-            if parsed:
-                contest=by_key.get("USACO")
-                if contest is not None:
-                    old_events=contest.get("events",[])
-                    if json.dumps(old_events,sort_keys=True)!=json.dumps(parsed,sort_keys=True):
-                        history.insert(0,{
-                            "id":f"USACO-schedule-{now.strftime('%Y%m%dT%H%M%SZ')}",
-                            "contest":"USACO","type":"schedule_updated",
-                            "detectedAt":now_iso,"url":"https://usaco.org/",
-                            "message":f"检测到 USACO 2026–2027 官方赛程，共 {len(parsed)} 项日期安排。",
-                            "before":old_events,"after":parsed
-                        })
-                        contest["events"]=parsed
-                        contest["season"]="2026–2027 官方赛程已发布"
-                        contest["regText"]="无需赛季预注册；比赛日期已从 USACO 官方赛程页面同步。"
-            elif page:
-                # Keep any previously verified dates; otherwise show a clear pending state.
-                contest=by_key.get("USACO")
-                if contest is not None and not any(e.get("start") for e in contest.get("events",[])):
-                    contest["season"]="2026–2027 赛程待官方公布"
-                    contest["regText"]="常年可创建个人账号；无需赛季预注册。2026–2027 官方赛程尚未检测到明确赛程标题。"
+        if key in ("USACO","NZIC"):
+            page=next((p for p in page_results if p.get("url")==urls[0] and "text" in p),None)
+            parser=parse_usaco_schedule if key=="USACO" else parse_nzic_schedule
+            parsed=parser(page["text"],now.year) if page else None
+            contest=by_key.get(key)
+            if parsed and contest is not None:
+                old_events=contest.get("events",[])
+                if key=="NZIC":
+                    parsed=[e for e in old_events if e.get("id")=="nzic-open"]+parsed
+                if old_events!=parsed:
+                    history.insert(0,{"id":f"{key}-schedule-{now.strftime('%Y%m%dT%H%M%SZ')}",
+                        "contest":key,"type":"schedule_updated","detectedAt":now_iso,"url":urls[0],
+                        "message":f"{key} {now.year}–{now.year+1} 官方赛程已同步。",
+                        "before":old_events,"after":parsed})
+                    # Preserve superseded events for reference/audit without presenting them as confirmed.
+                    contest.setdefault("scheduleArchive",[]).append({"replacedAt":now_iso,"events":old_events})
+                    contest["events"]=parsed
+                    contest["scheduleSeasonYear"]=now.year
+                    contest["season"]=f"{now.year}–{now.year+1} 官方赛程已发布"
+                    contest["shortSeason"]=contest["season"]
 
     # Keep a bounded, newest-first audit trail.
-    history=history[:300]
+    # Retain all historical records.
     data["lastChecked"]=now_iso
     data["history"]=history[:80]
     status["lastChecked"]=now_iso
-    status["scheduleParser"]="USACO 2026–2027 explicit-heading parser"
-    status["frequencyMinutes"]={"USACO":30,"others":360}
+    status["scheduleParser"]="Dynamic current-season USACO / NZIC explicit-date parsers"
+    status["frequencyMinutes"]={key:720 for key in SOURCES}
     write_json(DATA,data)
     write_json(STATUS,status)
     write_json(HISTORY,history)
@@ -189,3 +200,4 @@ def main():
 
 if __name__=="__main__":
     main()
+
