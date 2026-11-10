@@ -61,20 +61,30 @@ button:hover, .btn:hover { border-color: var(--ink) }
 button:focus-visible, a:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px }
 #lang-toggle { background: var(--green); border-color: var(--ink) }
 .history-item { border-inline-start: 3px solid var(--green); flex-wrap: wrap; overflow-wrap: anywhere }
-.history-item[data-type="error"], .history-item[data-type="fetch_error"],
-.history-item[data-type="monitor_error"], .history-item[data-type="parse_review"] {
-  border-inline-start-color: var(--red);
-}
+/* Red is reserved for verified problems and important date corrections. */
+.health-badge { display: inline-block; max-width: 100%; padding: 4px 9px; border-radius: 8px; color: var(--ink); font-size: 12px; font-weight: 700; overflow-wrap: anywhere }
+.health-badge.warning { background: var(--red) }
+.health-badge.verified { background: var(--green) }
+.health-badge.neutral { background: var(--quiet) }
+.monitor-alerts { margin-bottom: 18px; padding: 12px 16px; border: 1px solid var(--line); border-inline-start: 5px solid var(--red); border-radius: 12px; background: var(--surface); overflow-wrap: anywhere }
+.monitor-alerts h2, .history-item p { margin: 4px 0 8px }
+.monitor-alerts a { color: var(--ink) }
+.change-values { display: flex; flex-wrap: wrap; gap: 6px 16px; margin: 0 }
+.change-values dt { color: var(--muted); font-weight: 700 }
+.change-values dd { margin: 3px 0 0 }
+.history-archive { margin-top: 14px }
+.history-archive summary { cursor: pointer; font-weight: 700; margin-bottom: 10px }
 .history-item a, .modal a { text-decoration-color: var(--yellow); text-underline-offset: 3px }
 dialog { background: var(--surface); border-block-start: 4px solid var(--yellow) }
 .event-title, .event-date { max-width: 100% }
 .modal-head { flex-wrap: wrap }
 </style></head><body><main class="shell">
 <header class="top"><div><h1>CS Contest Watch</h1><div class="sub" id="subtitle">六项计算机竞赛 · 官方赛程追踪 · 自动变更历史</div></div><div class="actions"><button id="lang-toggle" type="button" aria-label="Switch language">EN</button><button id="refresh" type="button">↻ 刷新数据</button><button class="primary" id="export">导出时间轴 PNG</button></div></header>
-<div class="meta"><span class="dot"></span><span id="update">正在读取监测数据…</span><span>·</span><span id="monitor-note">USACO 每30分钟 / 其他赛事每6小时检查</span></div>
+<div class="meta"><span class="dot"></span><span id="update">正在读取监测数据…</span><span>·</span><span id="monitor-note">每12小时检查官方来源</span><a id="workflow-status" class="health-badge neutral" href="https://github.com/tfrw123/cs-contest-watch/actions/workflows/monitor-and-deploy.yml" target="_blank" rel="noreferrer">查看 GitHub Actions 状态</a></div>
+<section id="monitor-alerts" class="monitor-alerts" aria-live="polite" hidden></section>
 <section class="panel"><div class="section-head"><h2 id="timeline-heading">2026–2027 赛季赛事时间表</h2><div class="legend"><span class="key"><i class="swatch confirmed"></i>比赛/答题时间</span><span class="key"><i class="swatch deadline"></i>报名/订购截止</span><span class="key"><i class="swatch confirmed"></i>正式比赛日</span><span class="key"><i class="swatch pending"></i>官方待公布</span><span class="key"><i class="swatch reference"></i><span>去年日期参考</span></span><span class="key"><i class="swatch expected"></i>官网预计</span></div></div><div class="timeline-wrap"><div class="timeline" id="timeline"></div></div></section>
 <section class="cards" id="cards"></section>
-<section class="panel history"><div class="section-head"><h2 id="history-heading">官方信息更新记录</h2><span class="sub" id="history-sub">仅记录检测到的变化</span></div><div class="history-list" id="history"></div></section>
+<section class="panel history"><div class="section-head"><h2 id="history-heading">官方信息更新记录</h2><span class="sub" id="history-sub">仅记录检测到的变化</span></div><div class="history-list" id="history" aria-live="polite"></div><details class="history-archive" id="history-archive" hidden><summary>历史公告</summary><div class="history-list"></div></details></section>
 <footer id="footer-note">赛季按当前年份自动滚动；官方尚未公布的新赛季日期以虚线标注为“去年日期参考”，仅供规划，确认后自动以官方日期替换。请以赛事官网及学校通知为准。</footer>
 </main><dialog id="detail"><div class="modal"><button class="close" id="detail-close" onclick="document.getElementById('detail').close()">关闭 ✕</button><div id="detail-body"></div></div></dialog>
 <script>
@@ -131,7 +141,11 @@ const t=k=>I18N[LANG][k]||k;
 function status(c){let es=(c.events||[]).filter(e=>e.start&&!e.reference&&e.kind!=="reference");let now=new Date();if(es.some(e=>e.start<=now.toISOString().slice(0,10)&&e.end>=now.toISOString().slice(0,10)&&e.kind!=="deadline"))return [t("statusRunning"),"running"];let d=es.find(e=>e.kind==="deadline");if(d){let dt=new Date(d.end+"T23:59:59");return dt>=now?[t("statusOpen"),"open"]:[t("statusClosed"),"closed"]}return [t("statusPending"),"neutral"]}
 function eventCopy(e){
  const fmt=d=>LANG==="zh"?d.replace(/-/g,"/"):new Date(d+"T00:00:00").toLocaleDateString("en-US",{year:"numeric",month:"short",day:"numeric"});
- if(e.id==="nzic-open" && e.kind==="expected") return LANG==="zh"?["预计开放报名","2027年2月（官网预计）"]:["Registration expected to open","Feb 2027 (official estimate)"];
+ if(e.id==="nzic-open" && e.kind==="expected" && e.month){
+  const [year,month]=e.month.split("-");
+  const label=new Date(year,Number(month)-1,1).toLocaleDateString("en-US",{month:"short",year:"numeric"});
+  return LANG==="zh"?["预计开放报名",`${year}年${Number(month)}月（官网预计）`]:["Registration expected to open",`${label} (official estimate)`];
+ }
  if(e.reference||e.kind==="reference"){
   const dates=e.referenceStart||e.start, end=e.referenceEnd||e.end;
   return [LANG==="zh"?"参考上一赛季赛程":"Previous-season schedule reference",dates?(dates===end?fmt(dates):`${fmt(dates)}–${fmt(end)}`):""];
@@ -167,6 +181,86 @@ function seasonView(){
  });
  return {...DATA,season:SEASON_LABEL,contests};
 }
+const workflowPage = "https://github.com/tfrw123/cs-contest-watch/actions/workflows/monitor-and-deploy.yml";
+let workflowRun = null;
+
+function bilingual(zh, en) {
+ return LANG === "zh" ? zh : en;
+}
+
+function changeValue(value) {
+ if (!value) return bilingual("尚未公布", "Not published");
+ const date = value.start ? [value.start, value.end === value.start ? null : value.end].filter(Boolean).join(" – ") : value.month;
+ return [date, value.status === "expected" ? bilingual("官网预计", "Official estimate") : bilingual("官方确认", "Confirmed")].filter(Boolean).join(" · ");
+}
+
+function renderHistory() {
+ const history = (DATA.history || []).filter(item => item.type === "verified_event_update");
+ const latest = new Set(DATA.latestUpdateIds || []);
+ const updates = history.filter(item => latest.has(item.id));
+ const archive = history.filter(item => !latest.has(item.id));
+ const row = item => {
+  const type = {
+   date_published: bilingual("日期公布", "Date published"),
+   date_adjusted: bilingual("重要日期调整", "Important date change"),
+   estimate_updated: bilingual("官方预计更新", "Official estimate updated"),
+  }[item.changeType] || bilingual("赛程更新", "Schedule update");
+  const badge = item.changeType === "date_adjusted" ? "warning" : "verified";
+  const label = item.event === "nzic-open" ? bilingual("报名预计开放","Expected registration opening") : item.label;
+  return `<article class="history-item">
+   <div><strong>${esc(item.contest)} · ${esc(item.season)}</strong> <span class="health-badge ${badge}">${type}</span>
+    <p>${esc(label)}</p>
+    <dl class="change-values"><div><dt>${bilingual("更新前", "Before")}</dt><dd>${esc(changeValue(item.before))}</dd></div>
+    <div><dt>${bilingual("更新后", "After")}</dt><dd>${esc(changeValue(item.after))}</dd></div></dl>
+   </div>
+   <div><a href="${esc(item.url)}" target="_blank" rel="noreferrer">${t("source")} ↗</a><br>
+    <time datetime="${esc(item.detectedAt)}">${esc(item.detectedAt)}</time></div>
+  </article>`;
+ };
+ document.getElementById("history-sub").textContent = bilingual("仅展示已核实的赛事变化", "Verified contest updates only");
+ document.getElementById("history").innerHTML = updates.length ? updates.map(row).join("") :
+  `<p class="empty">${bilingual("暂未发现新的官方赛程更新", "No new official schedule updates found.")}</p>`;
+ const archived = document.getElementById("history-archive");
+ archived.hidden = !archive.length;
+ archived.querySelector("summary").textContent = bilingual(`历史公告（${archive.length}）`, `Earlier announcements (${archive.length})`);
+ archived.querySelector(".history-list").innerHTML = archive.map(row).join("");
+}
+
+function renderMonitorHealth() {
+ const issues = DATA.monitorIssues || [];
+ const failed = ["failure", "timed_out", "action_required", "startup_failure"].includes(workflowRun?.conclusion);
+ const succeeded = workflowRun?.conclusion === "success";
+ const status = document.getElementById("workflow-status");
+ status.href = workflowRun?.html_url || workflowPage;
+ status.className = "health-badge " + (failed ? "warning" : succeeded ? "verified" : "neutral");
+ status.textContent = failed ? bilingual("GitHub Actions 运行失败", "GitHub Actions failed") :
+  succeeded ? bilingual("GitHub Actions 运行正常", "GitHub Actions succeeded") :
+  bilingual("查看 GitHub Actions 状态", "View GitHub Actions status");
+ const panel = document.getElementById("monitor-alerts");
+ panel.hidden = !issues.length && !failed;
+ if (panel.hidden) return;
+ const issueNames = {
+  fetch_error: bilingual("官方页面访问失败", "Official page unreachable"),
+  parse_error: bilingual("赛程解析失败", "Schedule parsing failed"),
+  date_conflict: bilingual("日期冲突", "Conflicting schedule dates"),
+ };
+ panel.innerHTML = `<h2><span class="health-badge warning">${bilingual("监测异常", "Monitoring issue")}</span></h2>
+  <p>${bilingual("页面保留上次有效赛程，请以官网为准。", "The last valid schedule remains available. Check the official source for updates.")}</p>
+  <ul>${issues.map(issue => `<li><strong>${esc(issue.contest)}</strong> · ${issueNames[issue.type] || issueNames.fetch_error}
+   · <a href="${esc(issue.url)}" target="_blank" rel="noreferrer">${t("source")} ↗</a></li>`).join("")}
+   ${failed ? `<li><a href="${esc(status.href)}" target="_blank" rel="noreferrer">${bilingual("自动监测或部署失败，查看运行详情", "Monitoring or deployment failed. View run details.")} ↗</a></li>` : ""}</ul>`;
+}
+
+async function loadWorkflowStatus() {
+ try {
+  const url = "https://api.github.com/repos/tfrw123/cs-contest-watch/actions/workflows/monitor-and-deploy.yml/runs?branch=main&status=completed&per_page=1";
+  const response = await fetch(url, {signal: AbortSignal.timeout(6000)});
+  if (response.ok) workflowRun = (await response.json()).workflow_runs?.[0] || null;
+ } catch (error) {
+  // The workflow link still works when the public API is offline or rate limited.
+ }
+ renderMonitorHealth();
+}
 function render(){
  const VIEW=seasonView();
  document.documentElement.lang=LANG==="zh"?"zh-CN":"en";
@@ -177,10 +271,11 @@ function render(){
  document.getElementById("timeline").innerHTML=`<div class="months">${months.map(m=>`<div class="month">${m}</div>`).join("")}</div>`+KEYS.map(k=>{let c=VIEW.contests.find(x=>x.key===k);if(!c)return "";let events=(c.events||[]).filter(e=>!e.start||(monthIndex(e.end||e.start)>=0&&monthIndex(e.start)<11)).map(e=>{let a=e.start?Math.max(0,monthIndex(e.start)):4;let b=e.end?Math.min(11,monthIndex(e.end)+1):11;if(e.month){a=Math.max(0,monthIndex(e.month+"-01"));b=a+1}let cp=eventCopy(e);return `<div class="event ${esc(e.kind)}" style="--start:${a+1};--end:${Math.min(12,Math.max(a+1,b)+1)}" title="${esc(cp.join(" · "))}"><span class="event-title">${esc(cp[0])}</span><span class="event-date">${esc(cp[1])}</span></div>`}).join("");return `<div class="track"><div class="race">${logo(k)}<div class="race-label"><strong>${k}</strong><small>${esc(modeText(c))}</small></div></div><div class="lane">${events}</div></div>`}).join("");
  document.getElementById("cards").innerHTML=KEYS.map(k=>{let c=VIEW.contests.find(x=>x.key===k);if(!c)return "";let [label,cl]=status(c),cardDates=LANG==="en"?CARD_EN[k]:[c.deadline||"待公布",c.shortSeason||"待公布"];return `<article class="card" data-key="${k}"><div class="card-top">${logo(k)}<div><h3>${k}</h3><div class="full">${esc(c.full)}</div></div><span class="pill ${cl}">${label}</span></div><div class="mode">${t("registration")}${esc(modeText(c))}</div><div class="card-meta"><span>${t("cutoff")}${esc(cardDates[0])}</span><span>${t("season")}${esc(cardDates[1])}</span></div></article>`}).join("");
  document.querySelectorAll(".card").forEach(el=>el.onclick=()=>showDetail(el.dataset.key));
- let hist=DATA.history||[];document.getElementById("history").innerHTML=hist.length?hist.slice(0,30).map(h=>`<div class="history-item" data-type="${esc(h.type)}"><span><b>${esc(h.contest)}</b> · ${esc(h.message||h.type)}</span><span><a href="${esc(h.url||"#")}" target="_blank" rel="noreferrer">${t("source")} ↗</a><br>${esc(h.detectedAt||"")}</span></div>`).join(""):`<div class="empty">${t("noHistory")}</div>`;
+ renderHistory();
+ renderMonitorHealth();
 }
 function showDetail(k){let c=seasonView().contests.find(x=>x.key===k);if(!c)return;let fields=LANG==="en"?EN_DETAILS[k]:[c.eligibility,c.rounds,c.groups,c.difficulty,c.languages,c.format,c.regText];document.getElementById("detail-body").innerHTML=`<div class="modal-head">${logo(k)}<div><h2>${k}</h2><div class="sub">${esc(c.full)}</div></div></div>`+fields.map((v,i)=>`<h3>${t("detailFields")[i]}</h3><p>${esc(v|| (LANG==="zh"?"官方信息待核实":"Awaiting official information"))}</p>`).join("")+`<h3>${LANG==="zh"?"关键日期":"Key dates"}</h3><p>${(c.events||[]).map(e=>esc(eventCopy(e).join(" · "))).join("<br>")||"TBD"}</p><h3>${t("source")}</h3><p>${(c.links||[]).map(([a,u])=>`<a href="${esc(u)}" target="_blank" rel="noreferrer">${LANG==="en"?({"官方报名页":"Official registration","官方赛程":"Official schedule","组别说明":"Divisions","官方 FAQ":"Official FAQ","BCC 官方赛事页":"Official BCC page","CCC 官方赛事页":"Official CCC page","AIO 官方赛事页":"Official AIO page","NZIC 官方赛事页":"Official NZIC page","NZIC 官方规则":"Official NZIC rules","NZOI 介绍":"NZOI overview","账号注册":"Account registration","官方规则与资格":"Official rules and eligibility","CEMC 官网":"CEMC website","AMT 竞赛门户":"AMT competition portal"}[a]||a):a} ↗</a>`).join("<br>")}</p>`;document.getElementById("detail").showModal()}
-async function load(){try{let r=await fetch("./data/contests.json",{cache:"no-store"});if(r.ok)DATA=await r.json()}catch(e){}try{let h=await fetch("./data/history.json",{cache:"no-store"});if(h.ok)DATA.history=await h.json()}catch(e){}render()}
+async function load(){try{let r=await fetch("./data/contests.json",{cache:"no-store"});if(r.ok)DATA=await r.json()}catch(e){}try{let h=await fetch("./data/history.json",{cache:"no-store"});if(h.ok)DATA.history=await h.json()}catch(e){}render();await loadWorkflowStatus()}
 async function exportTimelinePNG(){
  const btn=document.getElementById("export"), timeline=document.getElementById("timeline");
  const oldLabel=btn.textContent; btn.disabled=true; btn.textContent="正在生成 PNG…";
