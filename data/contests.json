@@ -1,6 +1,6 @@
 {
   "season": "2026–2027",
-  "lastChecked": "2026-11-10T06:00:35Z",
+  "lastChecked": "2026-11-10T06:11:00Z",
   "contests": [
     {
       "key": "USACO",
@@ -362,5 +362,7 @@
       ]
     }
   ],
-  "history": []
+  "history": [],
+  "latestUpdateIds": [],
+  "monitorIssues": []
 }
